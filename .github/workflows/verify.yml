@@ -1,0 +1,31 @@
+name: verify
+
+# The published entry points are committed, so the only thing CI has to prove is
+# that they still match `src/client.js` and that the suite passes on a clean
+# checkout — the exact state a `dsh plugin add github:WONGIII/dsh-expose`
+# install receives.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: ['20', '22', '24']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Check the built browser half is current
+        run: node scripts/build.mjs --check
+      - name: Check the package against the DSH plugin conventions
+        run: node scripts/verify-package.mjs
+      - name: Run the test suite
+        run: node --test --test-concurrency=1 test/proxy.test.mjs test/state.test.mjs test/network.test.mjs test/client.test.mjs test/host.test.mjs

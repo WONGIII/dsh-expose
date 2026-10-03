@@ -1,0 +1,70 @@
+{
+  "name": "dsh-expose",
+  "version": "0.1.0",
+  "description": "Expose the running DeepSeek Harness instance to the LAN or the public internet: choose a bind address and port, flip one switch, and copy the remote URL.",
+  "type": "module",
+  "main": "lib/index.js",
+  "icon": "./assets/icon.svg",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "src",
+    "scripts",
+    "test",
+    "docs",
+    "locale/*.json",
+    "assets/icon.svg",
+    "cordis.patch.yml",
+    "README.md",
+    "README.en.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check",
+    "verify:package": "node scripts/verify-package.mjs",
+    "test": "node --test --test-concurrency=1 test/proxy.test.mjs test/state.test.mjs test/network.test.mjs test/client.test.mjs test/host.test.mjs",
+    "verify": "node scripts/build.mjs --check && node scripts/verify-package.mjs && node --test --test-concurrency=1 test/proxy.test.mjs test/state.test.mjs test/network.test.mjs test/client.test.mjs test/host.test.mjs"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "plugin",
+    "remote-access",
+    "port-forward",
+    "lan",
+    "reverse-proxy"
+  ],
+  "author": "WONGIII",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WONGIII/dsh-expose.git"
+  },
+  "homepage": "https://github.com/WONGIII/dsh-expose#readme",
+  "bugs": {
+    "url": "https://github.com/WONGIII/dsh-expose/issues"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    }
+  }
+}

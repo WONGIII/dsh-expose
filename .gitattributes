@@ -1,0 +1,9 @@
+# Repository-wide: LF in the working tree so `lib/` artifacts hash the same on
+# every platform (the build script already normalizes CRLF).
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary

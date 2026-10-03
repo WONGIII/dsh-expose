@@ -1,0 +1,16 @@
+# dsh-expose bundle patch: mounts the plugin into a profile layer stack.
+#
+# The host half owns the exposure listener (a reverse proxy that forwards to
+# this instance's own web carrier) and the authenticated control API; the
+# browser half contributes the "Remote access" tab to the Plugins settings page.
+#
+# A profile may override defaults in its own patch row with the same id:
+#   - id: dsh-expose
+#     name: dsh-expose
+#     config:
+#       host: 0.0.0.0
+#       port: 3080
+#       enabled: false
+- insert:
+    - id: dsh-expose
+      name: 'dsh-expose'

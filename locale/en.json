@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Remote Access",
+    "description": "Publish this DSH instance to the LAN or the internet: bind address, port, one switch, and the remote URLs to hand out."
+  }
+}

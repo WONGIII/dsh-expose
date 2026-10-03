@@ -1,0 +1,12 @@
+# Dependencies are never part of this package: it uses Node built-ins on the
+# host side and the page's own React on the browser side.
+node_modules/
+
+# Editor / OS noise.
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# Local scratch used while verifying against a live instance.
+.verify/
